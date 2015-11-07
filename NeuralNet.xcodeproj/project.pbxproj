@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		AA9776C11B958192009681DC /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9776C01B958192009681DC /* main.swift */; };
 		AA9776CA1B958F8D009681DC /* NNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9776C91B958F8D009681DC /* NNet.swift */; settings = {ASSET_TAGS = (); }; };
+		AA9776CD1B97FA57009681DC /* forexParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9776CC1B97FA57009681DC /* forexParser.swift */; settings = {ASSET_TAGS = (); }; };
+		AA9776CF1B9821D3009681DC /* CSwiftV.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9776CE1B9821D3009681DC /* CSwiftV.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +29,9 @@
 		AA9776BD1B958192009681DC /* NeuralNet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = NeuralNet; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA9776C01B958192009681DC /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		AA9776C91B958F8D009681DC /* NNet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NNet.swift; sourceTree = "<group>"; };
+		AA9776CB1B97FA4F009681DC /* data.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = data.csv; sourceTree = "<group>"; };
+		AA9776CC1B97FA57009681DC /* forexParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = forexParser.swift; sourceTree = "<group>"; };
+		AA9776CE1B9821D3009681DC /* CSwiftV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSwiftV.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,8 +64,11 @@
 		AA9776BF1B958192009681DC /* NeuralNet */ = {
 			isa = PBXGroup;
 			children = (
+				AA9776CC1B97FA57009681DC /* forexParser.swift */,
 				AA9776C01B958192009681DC /* main.swift */,
 				AA9776C91B958F8D009681DC /* NNet.swift */,
+				AA9776CE1B9821D3009681DC /* CSwiftV.swift */,
+				AA9776CB1B97FA4F009681DC /* data.csv */,
 			);
 			path = NeuralNet;
 			sourceTree = "<group>";
@@ -121,7 +129,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA9776CD1B97FA57009681DC /* forexParser.swift in Sources */,
 				AA9776CA1B958F8D009681DC /* NNet.swift in Sources */,
+				AA9776CF1B9821D3009681DC /* CSwiftV.swift in Sources */,
 				AA9776C11B958192009681DC /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,6 +250,7 @@
 				AA9776C61B958192009681DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

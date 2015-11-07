@@ -1,14 +1,5 @@
-//
-//  NNet.swift
-//  NeuralNet
-//
-//  Created by Ethan Jackwitz on 9/1/15.
-//  Copyright © 2015 Ethan Jackwitz. All rights reserved.
-//
-
 import Foundation
 
-//CGFloat(Float(arc4random()) / Float(UINT32_MAX))
 func randomWeight() -> Double {
 	return Double(arc4random()) / Double(UInt32.max)
 }
@@ -25,21 +16,20 @@ public struct Connection {
 
 public class Neuron {
 	
-	private var eta: Double = 0.15
+	private var eta: Double = 0.15	//learning rate
 	private var alpha: Double = 0.5
 	private var nIndex: Int
 	private var gradient = Double()
 	public var outputWeights = [Connection]()
 	public var outputValue: Double
 	
-	public init(numOutputs: Int, index: Int) {
+	public init(numOutputs: Int, index: Int, weight: Double = randomWeight()) {
 		outputValue = 0.0
 		nIndex = index
 		
 		for _ in 0..<numOutputs {
-			outputWeights.append(Connection(weight: randomWeight()))
+			outputWeights.append(Connection(weight: weight))
 		}
-		
 	}
 	
 	public func feedForward(previousLayer: [Neuron], cLayer: [Neuron]) {
@@ -89,7 +79,9 @@ public class Neuron {
 	}
 	
 	private func transferFunctionDerivative(x: Double) -> Double {
+		
 		return 1.0 - x * x
+		
 	}
 	
 }
@@ -101,9 +93,10 @@ public class Net {
 	
 	public var recentAverageError = 0.0
 	
-	public init(layout: [Int], withBiasNeuron: Bool = true) {
+	public init(layout: [Int], bias: Double = 1.0) {
 		
 		for layerNum in 0..<layout.count {
+			
 			let nOutputs = layerNum == layout.count - 1 ? 0 : layout[layerNum + 1]
 			layers.append([])
 			for neuronNum in 0...layout[layerNum] {
@@ -111,14 +104,41 @@ public class Net {
         		print("Made a Neuron!")
 				
 				if neuronNum == layout[layerNum] {
-					newNeuron.outputValue = 1.0
+					//this neuron is a bias neuron.
+					newNeuron.outputValue = bias
 				}
 				
 				layers[layerNum].append(newNeuron)
 			}
 			print("")
 		}
+	}
+	
+	public init(layout: [Int], weights: [[Double]], bias: Double = 0.0) {
 		
+		assert(layout.count == weights.count, "Passed \(layout.count) layers, but only weights for \(weights.count) layers.")
+		for i in 0..<layout.count {
+			assert(layout[i] == weights[i].count, "Passed \(layout[i]) neurons for layer \(i), but only \(weights[i].count) weights for this layer.")
+		}
+		
+		for layerNum in 0..<layout.count {
+			//if final layer then nOutputs is 0, else nOutputs = nNeurons in next layer.
+			let nOutputs = layerNum == layout.count - 1 ? 0 : layout[layerNum + 1]
+			layers.append([])
+			for neuronNum in 0...layout[layerNum] {
+				let newNeuron = Neuron(numOutputs: nOutputs, index: neuronNum, weight: weights[layerNum][neuronNum])
+				print("Made a Neuron!")
+				
+				if neuronNum == layout[layerNum] {
+					//this neuron is a bias neuron
+					newNeuron.outputValue = bias
+				}
+				
+				layers[layerNum].append(newNeuron)
+			}
+			print("")
+			
+		}
 	}
 	
 	public func getResults() -> [Double] {
